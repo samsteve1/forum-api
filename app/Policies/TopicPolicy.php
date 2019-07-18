@@ -10,8 +10,8 @@ class TopicPolicy
 {
     use HandlesAuthorization;
 
-    public function update(User $user, Topic $topic)
+    public function touch(User $user, Topic $topic)
     {
-        return $user->id === $topic->user_id;
+        return $user->id === $topic->user->id;
     }
 }
