@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Post;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Passport\HasApiTokens;
@@ -41,5 +42,9 @@ class User extends Authenticatable
     public function avatar()
     {
         return 'https://www.gravatar.com/avater/'. md5($this->email) . '?s=45&d=mm';
+    }
+    public function hasLikedPost(Post $post)
+    {
+        return $post->likes->where('user_id', $this->id)->count() > 0;
     }
 }
